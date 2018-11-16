@@ -1,20 +1,9 @@
-/*
-
-for the number of times specified:
-
-
-*/
-
-
-function skippy_numbers(number, array, length){
-    var result = array || [];
-    var length = length || 8;
+function skippy_numbers(number){
+    var results = [number, number+1];
     
-    for (var index = 0; index < number; index++){
-        result.push(number+index);
+    for (var index = 1; index < 4; index++){
+        let newNum = results[results.length-1] + number;
+        results.push(newNum, newNum+1);
     }
-    if (result.length < length){
-        skippy_numbers(number, result, length);
-    }
-    return result;
+    return results;
 }
