@@ -1,6 +1,6 @@
-function romanizeNumber(number){
-    var result = '';
-    var romanNumerals = {
+const romanizeNumber = number => {
+    let result = '';
+    const romanNumerals = {
         '1000': 'M',
         '900': 'CM',
         '500': 'D',
@@ -15,10 +15,10 @@ function romanizeNumber(number){
         '4': 'IV',
         '1': 'I'
     }
-    var divisors = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
-    var index = 0;
+    const divisors = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+    let index = 0;
     while(number){
-        var quotient = Math.floor(number / divisors[index]);
+        let quotient = Math.floor(number / divisors[index]);
         if(quotient){
             result += romanNumerals[divisors[index].toString()].repeat(quotient);
             number = number % divisors[index];
