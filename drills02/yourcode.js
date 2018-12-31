@@ -36,7 +36,8 @@ function getMinMaxMean(numbers){
 }
 
 function findMode(numbers){
-    let result = 0, maxCount = 0;
+    if (!numbers.length) return;
+    let result = numbers[0], maxCount = 1;
     const totals = {};
     numbers.map(item => {
         if(totals[item]){
