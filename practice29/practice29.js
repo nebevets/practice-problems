@@ -1,5 +1,3 @@
-// is there a better way than switch?
-
 function do_math(num1, num2, string){
     var operators = ['+', '-', '/', '*', 'x', 'X'];
     var operatorIndex = operators.indexOf(string);
@@ -20,3 +18,18 @@ function do_math(num1, num2, string){
 }
 
 do_math(5, 2, '5');
+
+const calc = (num1, num2, operator) => {
+    if (num2 === 0 && operator === '/'){
+        return 'divide by zero error';
+    }
+    const do_calc = {
+        '+': num1 + num2,
+        '-': num1 - num2,
+        '/': num1 / num2,
+        '*': num1 * num2,
+        'x': num1 * num2,
+        'X': num1 * num2
+    }
+    return do_calc[operator];
+}
