@@ -1,6 +1,6 @@
 function findMiddleOfString(aString){
     if (typeof aString !== 'string')
-        return "an error has occured";
+        return "not a string";
     var result = '';
     var middleIndex = Math.floor(aString.length/2);
     
