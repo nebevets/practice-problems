@@ -1,21 +1,17 @@
 
 
-function getPath(){
+function changeElements(){
 
 }
 
-function getPathParts(){
+function appendTextToElement(){
 
 }
 
-function getCapitalCount(){
+function addClass(){
+}
+
+function removeElements(){
 
 }
 
-function correctCalcChecker(){
-
-}
-
-function doMath(){
-
-}
