@@ -40,7 +40,7 @@ function findMode(numbers){
     let result = numbers[0], maxCount = 1;
     const totals = {};
     numbers.map(item => {
-        if(totals[item]){
+        if(totals[item.toString()]){
             totals[item]++;
             if(totals[item] >= maxCount){
                 maxCount = totals[item];
