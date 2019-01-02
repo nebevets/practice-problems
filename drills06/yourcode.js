@@ -1,7 +1,7 @@
 
 
 function removeClassFromElement(){
-
+	
 }
 
 function toggleClassOnElement(){

@@ -19,10 +19,12 @@ function unitTest(testData) {
       if(currentTestSet.testFunctions && currentTestSet.testFunctions[ioIndex]){
         var testFunction = currentTestSet.testFunctions[ioIndex].test;
         testErrorMessage = currentTestSet.testFunctions[ioIndex].message;
-        if(testFunction()){
+        var testResult = testFunction(result);
+        if(testResult === true){
           testErrorMessage = "Passed: " + testErrorMessage;
         } else {
-          testErrorMessage = "Failed: " + testErrorMessage;
+          var additionalMessage = testResult!==false ? testResult : '';
+          testErrorMessage = "Failed: " + testErrorMessage + '<br>' + testResult;
         }
       }
       
@@ -30,15 +32,24 @@ function unitTest(testData) {
         testOutputs = testOutputs.apply(null, testInputs);
       }
       var jsonAnswer = JSON.stringify(testOutputs, null, 2);
-      
       var status = 'incorrect';
-      if (jsonResult === jsonAnswer && testFunction()) {
+      if (jsonResult === jsonAnswer && testResult===true) {
         status = 'correct';
       }
-      displayMessage('<strong>Question ' + (testI + 1) + ' Test ' + (ioIndex + 1) + '&gt;&gt;&gt;</strong> ' + testData[testI].question, jsonInputs, jsonAnswer, jsonResult, status, testErrorMessage);
+      displayMessage({
+        questionText: '<strong>Question ' + (testI + 1) + ' Test ' + (ioIndex + 1) + '&gt;&gt;&gt;</strong> ' + testData[testI].question, 
+        inputs: convertedInputs, 
+        expected: jsonAnswer, 
+        answer: jsonResult, 
+        mode: status, 
+        functionTestMessage: testErrorMessage,
+        functionName: testData[testI].functionToTest
+      });
     }
   }
 }
+//function displayMessage(questionText, inputs, expected, answer, mode, functionTestMessage) {
+
 function convertFunctionContentsToString(content){
   function testFunction(item){
     if(typeof item === 'function'){
@@ -75,13 +86,16 @@ function handleStartTest(){
   unitTest(testVals);
 }
 
-function displayMessage(questionText, inputs, expected, answer, mode, functionTestMessage) {
+function displayMessage( dataOptions ) {
+  var {questionText, inputs, expected, answer, mode, functionTestMessage, functionName} = dataOptions;
   var questionContainer = $("<div>", {
     html: questionText,
     'class': 'question'
   });
+  inputs = inputs.map( input => JSON.stringify(input, null, 2));
   var inputContainer = $("<div>", {
-    html: '<pre class="inputs">Test Inputs:\n' + inputs + "</pre>"
+    //html: '<pre class="inputs">Test Inputs:\n' + inputs + "</pre>"
+    html: `<pre class="inputs"> Test call: ${functionName}(${inputs.join(',')})`
   })
   var resultContainer = $("<div>", {
     'class': mode,
