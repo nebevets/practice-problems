@@ -49,5 +49,4 @@ function removeElements(selector){
         let parent = elements[index].parentNode;
         parent.removeChild(elements[index]);
     }
-    //return elements.length;
 }
