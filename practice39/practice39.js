@@ -6,7 +6,7 @@ function isWavePattern(numbers){
     sortedNumbers.sort((a, b)=>a-b);
     
     let start = 0;
-    let middle = Math.floor(sortedNumbers.length/2) + start;
+    let middle = Math.floor(sortedNumbers.length/2);
     
     do{
         isWave = sortedNumbers[start++] < sortedNumbers[middle++];
